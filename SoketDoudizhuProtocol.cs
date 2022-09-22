@@ -33,27 +33,30 @@ namespace SoketDoudizhuProtocol {
             "BSABKAUSDgoGcm9vbWlkGAYgASgJIpgBCghSb29tSW5mbxIQCghsYW5kbG9y",
             "ZBgBIAEoCRIRCglwbGF5ZXJudW0YAiABKAUSEAoIcm9vbXRpbGUYAyABKAkS",
             "DgoGc3RhdHVzGAQgASgFEg4KBnJvb21pZBgFIAEoCRI1CgpwbGF5ZXJpbmZv",
-            "GAYgAygLMiEuU29rZXREb3VkaXpodVByb3RvY29sLlBsYXllckluZm8iUwoI",
-            "R2FtZUluZm8SDgoGc3RhdHVzGAEgASgFEhMKC2N1cnVzZXJuYW1lGAIgASgJ",
-            "EhMKC3BsYXllcnRpbWVzGAMgASgFEg0KBXRpbWVzGAQgASgFIoMDCghNYWlu",
-            "UGFjaxI3CgtyZXF1ZXN0Y29kZRgBIAEoDjIiLlNva2V0RG91ZGl6aHVQcm90",
-            "b2NvbC5SZXF1ZXN0Q29kZRI1CgphY3Rpb25jb2RlGAIgASgOMiEuU29rZXRE",
-            "b3VkaXpodVByb3RvY29sLkFjdGlvbkNvZGUSNQoKcmV0dXJuY29kZRgDIAEo",
-            "DjIhLlNva2V0RG91ZGl6aHVQcm90b2NvbC5SZXR1cm5Db2RlEjMKCWxvZ2lu",
-            "cGFjaxgEIAEoCzIgLlNva2V0RG91ZGl6aHVQcm90b2NvbC5Mb2dpblBhY2sS",
-            "MQoIcm9vbWluZm8YBSADKAsyHy5Tb2tldERvdWRpemh1UHJvdG9jb2wuUm9v",
-            "bUluZm8SNQoKcGxheWVyaW5mbxgGIAEoCzIhLlNva2V0RG91ZGl6aHVQcm90",
-            "b2NvbC5QbGF5ZXJJbmZvEjEKCGdhbWVpbmZvGAcgASgLMh8uU29rZXREb3Vk",
-            "aXpodVByb3RvY29sLkdhbWVJbmZvKkYKC1JlcXVlc3RDb2RlEg8KC1JlcXVl",
-            "c3ROb25lEAASCAoEVXNlchABEggKBFJvb20QAhIICgRHYW1lEAMSCAoEQ2hh",
-            "dBAEKtoBCgpBY3Rpb25Db2RlEg4KCkFjdGlvbk5vbmUQABIJCgVMb2dpbhAB",
-            "EgwKCFJlZ2lzdGVyEAISDwoLR2V0Um9vbUxpc3QQAxIOCgpDcmVhdGVSb29t",
-            "EAQSDAoISm9pblJvb20QBRIMCghFeGl0Um9vbRAGEg8KC0dldFJvb21JbmZv",
-            "EAcSDAoIU2VuZFRleHQQCBINCglDb3VudERvd24QCRINCglTdGFydEdhbWUQ",
-            "ChINCglEZWFsUG9rZXIQCxILCgdSb2JIb3N0EAwSDQoJU2VuZFBva2VyEA0q",
-            "UwoKUmV0dXJuQ29kZRIOCgpSZXR1cm5Ob25lEAASCwoHU3VjY2VzcxABEggK",
-            "BEZhaWwQAhIMCghSb29tRnVsbBADEhAKDFJvb21EaXNzb2x2ZRAEYgZwcm90",
-            "bzM="));
+            "GAYgAygLMiEuU29rZXREb3VkaXpodVByb3RvY29sLlBsYXllckluZm8iywEK",
+            "CEdhbWVJbmZvEg4KBnN0YXR1cxgBIAEoBRITCgtjdXJ1c2VybmFtZRgCIAEo",
+            "CRITCgtwbGF5ZXJ0aW1lcxgDIAEoBRINCgV0aW1lcxgEIAEoBRI1CgpwbGF5",
+            "ZXJpbmZvGAYgAygLMiEuU29rZXREb3VkaXpodVByb3RvY29sLlBsYXllcklu",
+            "Zm8SDQoFZGl6aHUYByABKAkSMAoKZGl6aHVwb2tlchgIIAMoCzIcLlNva2V0",
+            "RG91ZGl6aHVQcm90b2NvbC5Qb2tlciKDAwoITWFpblBhY2sSNwoLcmVxdWVz",
+            "dGNvZGUYASABKA4yIi5Tb2tldERvdWRpemh1UHJvdG9jb2wuUmVxdWVzdENv",
+            "ZGUSNQoKYWN0aW9uY29kZRgCIAEoDjIhLlNva2V0RG91ZGl6aHVQcm90b2Nv",
+            "bC5BY3Rpb25Db2RlEjUKCnJldHVybmNvZGUYAyABKA4yIS5Tb2tldERvdWRp",
+            "emh1UHJvdG9jb2wuUmV0dXJuQ29kZRIzCglsb2dpbnBhY2sYBCABKAsyIC5T",
+            "b2tldERvdWRpemh1UHJvdG9jb2wuTG9naW5QYWNrEjEKCHJvb21pbmZvGAUg",
+            "AygLMh8uU29rZXREb3VkaXpodVByb3RvY29sLlJvb21JbmZvEjUKCnBsYXll",
+            "cmluZm8YBiADKAsyIS5Tb2tldERvdWRpemh1UHJvdG9jb2wuUGxheWVySW5m",
+            "bxIxCghnYW1laW5mbxgHIAEoCzIfLlNva2V0RG91ZGl6aHVQcm90b2NvbC5H",
+            "YW1lSW5mbypGCgtSZXF1ZXN0Q29kZRIPCgtSZXF1ZXN0Tm9uZRAAEggKBFVz",
+            "ZXIQARIICgRSb29tEAISCAoER2FtZRADEggKBENoYXQQBCrrAQoKQWN0aW9u",
+            "Q29kZRIOCgpBY3Rpb25Ob25lEAASCQoFTG9naW4QARIMCghSZWdpc3RlchAC",
+            "Eg8KC0dldFJvb21MaXN0EAMSDgoKQ3JlYXRlUm9vbRAEEgwKCEpvaW5Sb29t",
+            "EAUSDAoIRXhpdFJvb20QBhIPCgtHZXRSb29tSW5mbxAHEgwKCFNlbmRUZXh0",
+            "EAgSDQoJQ291bnREb3duEAkSDQoJU3RhcnRHYW1lEAoSDQoJRGVhbFBva2Vy",
+            "EAsSDwoLR2V0R2FtZUluZm8QDBILCgdSb2JIb3N0EA0SDQoJU2VuZFBva2Vy",
+            "EA4qUwoKUmV0dXJuQ29kZRIOCgpSZXR1cm5Ob25lEAASCwoHU3VjY2VzcxAB",
+            "EggKBEZhaWwQAhIMCghSb29tRnVsbBADEhAKDFJvb21EaXNzb2x2ZRAEYgZw",
+            "cm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::SoketDoudizhuProtocol.RequestCode), typeof(global::SoketDoudizhuProtocol.ActionCode), typeof(global::SoketDoudizhuProtocol.ReturnCode), }, null, new pbr::GeneratedClrTypeInfo[] {
@@ -61,7 +64,7 @@ namespace SoketDoudizhuProtocol {
             new pbr::GeneratedClrTypeInfo(typeof(global::SoketDoudizhuProtocol.Poker), global::SoketDoudizhuProtocol.Poker.Parser, new[]{ "Weight", "Pokercolor" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::SoketDoudizhuProtocol.PlayerInfo), global::SoketDoudizhuProtocol.PlayerInfo.Parser, new[]{ "Username", "Coin", "Status", "Poker", "Curpokernum", "Roomid" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::SoketDoudizhuProtocol.RoomInfo), global::SoketDoudizhuProtocol.RoomInfo.Parser, new[]{ "Landlord", "Playernum", "Roomtile", "Status", "Roomid", "Playerinfo" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::SoketDoudizhuProtocol.GameInfo), global::SoketDoudizhuProtocol.GameInfo.Parser, new[]{ "Status", "Curusername", "Playertimes", "Times" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::SoketDoudizhuProtocol.GameInfo), global::SoketDoudizhuProtocol.GameInfo.Parser, new[]{ "Status", "Curusername", "Playertimes", "Times", "Playerinfo", "Dizhu", "Dizhupoker" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::SoketDoudizhuProtocol.MainPack), global::SoketDoudizhuProtocol.MainPack.Parser, new[]{ "Requestcode", "Actioncode", "Returncode", "Loginpack", "Roominfo", "Playerinfo", "Gameinfo" }, null, null, null, null)
           }));
     }
@@ -128,7 +131,7 @@ namespace SoketDoudizhuProtocol {
     /// </summary>
     [pbr::OriginalName("CountDown")] CountDown = 9,
     /// <summary>
-    ///开始游戏，只能由房主发起请求
+    ///开始游戏，房间内人数3个人且准备，只能由房主发起请求
     /// </summary>
     [pbr::OriginalName("StartGame")] StartGame = 10,
     /// <summary>
@@ -136,13 +139,17 @@ namespace SoketDoudizhuProtocol {
     /// </summary>
     [pbr::OriginalName("DealPoker")] DealPoker = 11,
     /// <summary>
+    ///获取游戏信息
+    /// </summary>
+    [pbr::OriginalName("GetGameInfo")] GetGameInfo = 12,
+    /// <summary>
     ///抢地主，在每个玩家回合的限制时间内，三个玩家都能抢，首回合玩家如果没叫第二次，那么地主给后续第一个抢的
     /// </summary>
-    [pbr::OriginalName("RobHost")] RobHost = 12,
+    [pbr::OriginalName("RobHost")] RobHost = 13,
     /// <summary>
     ///出牌，只有在抢完地主后并在当前操作回合，玩家才能出牌
     /// </summary>
-    [pbr::OriginalName("SendPoker")] SendPoker = 13,
+    [pbr::OriginalName("SendPoker")] SendPoker = 14,
   }
 
   public enum ReturnCode {
@@ -547,7 +554,7 @@ namespace SoketDoudizhuProtocol {
     public const int StatusFieldNumber = 3;
     private int status_;
     /// <summary>
-    ///状态码：1表示空闲
+    ///状态码：0表示离线，1表示空闲，2表示准备
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int Status {
@@ -1063,6 +1070,9 @@ namespace SoketDoudizhuProtocol {
       curusername_ = other.curusername_;
       playertimes_ = other.playertimes_;
       times_ = other.times_;
+      playerinfo_ = other.playerinfo_.Clone();
+      dizhu_ = other.dizhu_;
+      dizhupoker_ = other.dizhupoker_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1075,7 +1085,7 @@ namespace SoketDoudizhuProtocol {
     public const int StatusFieldNumber = 1;
     private int status_;
     /// <summary>
-    ///0,表示游戏结束，1表示游戏正在进行，2表示游戏在抢地主阶段，3表示游戏已经过了抢地主阶段，4表示游戏失败，5表示游戏胜利
+    ///1表示游戏开始，2表示游戏在抢地主阶段，3表示游戏中，4表示游戏失败，5表示游戏胜利
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public int Status {
@@ -1127,6 +1137,46 @@ namespace SoketDoudizhuProtocol {
       }
     }
 
+    /// <summary>Field number for the "playerinfo" field.</summary>
+    public const int PlayerinfoFieldNumber = 6;
+    private static readonly pb::FieldCodec<global::SoketDoudizhuProtocol.PlayerInfo> _repeated_playerinfo_codec
+        = pb::FieldCodec.ForMessage(50, global::SoketDoudizhuProtocol.PlayerInfo.Parser);
+    private readonly pbc::RepeatedField<global::SoketDoudizhuProtocol.PlayerInfo> playerinfo_ = new pbc::RepeatedField<global::SoketDoudizhuProtocol.PlayerInfo>();
+    /// <summary>
+    ///游戏内玩家信息
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::SoketDoudizhuProtocol.PlayerInfo> Playerinfo {
+      get { return playerinfo_; }
+    }
+
+    /// <summary>Field number for the "dizhu" field.</summary>
+    public const int DizhuFieldNumber = 7;
+    private string dizhu_ = "";
+    /// <summary>
+    ///这局游戏地主玩家
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Dizhu {
+      get { return dizhu_; }
+      set {
+        dizhu_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    /// <summary>Field number for the "dizhupoker" field.</summary>
+    public const int DizhupokerFieldNumber = 8;
+    private static readonly pb::FieldCodec<global::SoketDoudizhuProtocol.Poker> _repeated_dizhupoker_codec
+        = pb::FieldCodec.ForMessage(66, global::SoketDoudizhuProtocol.Poker.Parser);
+    private readonly pbc::RepeatedField<global::SoketDoudizhuProtocol.Poker> dizhupoker_ = new pbc::RepeatedField<global::SoketDoudizhuProtocol.Poker>();
+    /// <summary>
+    ///地主牌
+    /// </summary>
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::SoketDoudizhuProtocol.Poker> Dizhupoker {
+      get { return dizhupoker_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as GameInfo);
@@ -1144,6 +1194,9 @@ namespace SoketDoudizhuProtocol {
       if (Curusername != other.Curusername) return false;
       if (Playertimes != other.Playertimes) return false;
       if (Times != other.Times) return false;
+      if(!playerinfo_.Equals(other.playerinfo_)) return false;
+      if (Dizhu != other.Dizhu) return false;
+      if(!dizhupoker_.Equals(other.dizhupoker_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1154,6 +1207,9 @@ namespace SoketDoudizhuProtocol {
       if (Curusername.Length != 0) hash ^= Curusername.GetHashCode();
       if (Playertimes != 0) hash ^= Playertimes.GetHashCode();
       if (Times != 0) hash ^= Times.GetHashCode();
+      hash ^= playerinfo_.GetHashCode();
+      if (Dizhu.Length != 0) hash ^= Dizhu.GetHashCode();
+      hash ^= dizhupoker_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1183,6 +1239,12 @@ namespace SoketDoudizhuProtocol {
         output.WriteRawTag(32);
         output.WriteInt32(Times);
       }
+      playerinfo_.WriteTo(output, _repeated_playerinfo_codec);
+      if (Dizhu.Length != 0) {
+        output.WriteRawTag(58);
+        output.WriteString(Dizhu);
+      }
+      dizhupoker_.WriteTo(output, _repeated_dizhupoker_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1203,6 +1265,11 @@ namespace SoketDoudizhuProtocol {
       if (Times != 0) {
         size += 1 + pb::CodedOutputStream.ComputeInt32Size(Times);
       }
+      size += playerinfo_.CalculateSize(_repeated_playerinfo_codec);
+      if (Dizhu.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Dizhu);
+      }
+      size += dizhupoker_.CalculateSize(_repeated_dizhupoker_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -1226,6 +1293,11 @@ namespace SoketDoudizhuProtocol {
       if (other.Times != 0) {
         Times = other.Times;
       }
+      playerinfo_.Add(other.playerinfo_);
+      if (other.Dizhu.Length != 0) {
+        Dizhu = other.Dizhu;
+      }
+      dizhupoker_.Add(other.dizhupoker_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -1251,6 +1323,18 @@ namespace SoketDoudizhuProtocol {
           }
           case 32: {
             Times = input.ReadInt32();
+            break;
+          }
+          case 50: {
+            playerinfo_.AddEntriesFrom(input, _repeated_playerinfo_codec);
+            break;
+          }
+          case 58: {
+            Dizhu = input.ReadString();
+            break;
+          }
+          case 66: {
+            dizhupoker_.AddEntriesFrom(input, _repeated_dizhupoker_codec);
             break;
           }
         }
@@ -1289,7 +1373,7 @@ namespace SoketDoudizhuProtocol {
       returncode_ = other.returncode_;
       loginpack_ = other.loginpack_ != null ? other.loginpack_.Clone() : null;
       roominfo_ = other.roominfo_.Clone();
-      playerinfo_ = other.playerinfo_ != null ? other.playerinfo_.Clone() : null;
+      playerinfo_ = other.playerinfo_.Clone();
       gameinfo_ = other.gameinfo_ != null ? other.gameinfo_.Clone() : null;
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
@@ -1348,6 +1432,9 @@ namespace SoketDoudizhuProtocol {
     private static readonly pb::FieldCodec<global::SoketDoudizhuProtocol.RoomInfo> _repeated_roominfo_codec
         = pb::FieldCodec.ForMessage(42, global::SoketDoudizhuProtocol.RoomInfo.Parser);
     private readonly pbc::RepeatedField<global::SoketDoudizhuProtocol.RoomInfo> roominfo_ = new pbc::RepeatedField<global::SoketDoudizhuProtocol.RoomInfo>();
+    /// <summary>
+    ///房间信息
+    /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public pbc::RepeatedField<global::SoketDoudizhuProtocol.RoomInfo> Roominfo {
       get { return roominfo_; }
@@ -1355,16 +1442,15 @@ namespace SoketDoudizhuProtocol {
 
     /// <summary>Field number for the "playerinfo" field.</summary>
     public const int PlayerinfoFieldNumber = 6;
-    private global::SoketDoudizhuProtocol.PlayerInfo playerinfo_;
+    private static readonly pb::FieldCodec<global::SoketDoudizhuProtocol.PlayerInfo> _repeated_playerinfo_codec
+        = pb::FieldCodec.ForMessage(50, global::SoketDoudizhuProtocol.PlayerInfo.Parser);
+    private readonly pbc::RepeatedField<global::SoketDoudizhuProtocol.PlayerInfo> playerinfo_ = new pbc::RepeatedField<global::SoketDoudizhuProtocol.PlayerInfo>();
     /// <summary>
     ///玩家信息
     /// </summary>
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
-    public global::SoketDoudizhuProtocol.PlayerInfo Playerinfo {
+    public pbc::RepeatedField<global::SoketDoudizhuProtocol.PlayerInfo> Playerinfo {
       get { return playerinfo_; }
-      set {
-        playerinfo_ = value;
-      }
     }
 
     /// <summary>Field number for the "gameinfo" field.</summary>
@@ -1399,7 +1485,7 @@ namespace SoketDoudizhuProtocol {
       if (Returncode != other.Returncode) return false;
       if (!object.Equals(Loginpack, other.Loginpack)) return false;
       if(!roominfo_.Equals(other.roominfo_)) return false;
-      if (!object.Equals(Playerinfo, other.Playerinfo)) return false;
+      if(!playerinfo_.Equals(other.playerinfo_)) return false;
       if (!object.Equals(Gameinfo, other.Gameinfo)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
@@ -1412,7 +1498,7 @@ namespace SoketDoudizhuProtocol {
       if (Returncode != global::SoketDoudizhuProtocol.ReturnCode.ReturnNone) hash ^= Returncode.GetHashCode();
       if (loginpack_ != null) hash ^= Loginpack.GetHashCode();
       hash ^= roominfo_.GetHashCode();
-      if (playerinfo_ != null) hash ^= Playerinfo.GetHashCode();
+      hash ^= playerinfo_.GetHashCode();
       if (gameinfo_ != null) hash ^= Gameinfo.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
@@ -1444,10 +1530,7 @@ namespace SoketDoudizhuProtocol {
         output.WriteMessage(Loginpack);
       }
       roominfo_.WriteTo(output, _repeated_roominfo_codec);
-      if (playerinfo_ != null) {
-        output.WriteRawTag(50);
-        output.WriteMessage(Playerinfo);
-      }
+      playerinfo_.WriteTo(output, _repeated_playerinfo_codec);
       if (gameinfo_ != null) {
         output.WriteRawTag(58);
         output.WriteMessage(Gameinfo);
@@ -1473,9 +1556,7 @@ namespace SoketDoudizhuProtocol {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Loginpack);
       }
       size += roominfo_.CalculateSize(_repeated_roominfo_codec);
-      if (playerinfo_ != null) {
-        size += 1 + pb::CodedOutputStream.ComputeMessageSize(Playerinfo);
-      }
+      size += playerinfo_.CalculateSize(_repeated_playerinfo_codec);
       if (gameinfo_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Gameinfo);
       }
@@ -1506,12 +1587,7 @@ namespace SoketDoudizhuProtocol {
         Loginpack.MergeFrom(other.Loginpack);
       }
       roominfo_.Add(other.roominfo_);
-      if (other.playerinfo_ != null) {
-        if (playerinfo_ == null) {
-          Playerinfo = new global::SoketDoudizhuProtocol.PlayerInfo();
-        }
-        Playerinfo.MergeFrom(other.Playerinfo);
-      }
+      playerinfo_.Add(other.playerinfo_);
       if (other.gameinfo_ != null) {
         if (gameinfo_ == null) {
           Gameinfo = new global::SoketDoudizhuProtocol.GameInfo();
@@ -1553,10 +1629,7 @@ namespace SoketDoudizhuProtocol {
             break;
           }
           case 50: {
-            if (playerinfo_ == null) {
-              Playerinfo = new global::SoketDoudizhuProtocol.PlayerInfo();
-            }
-            input.ReadMessage(Playerinfo);
+            playerinfo_.AddEntriesFrom(input, _repeated_playerinfo_codec);
             break;
           }
           case 58: {

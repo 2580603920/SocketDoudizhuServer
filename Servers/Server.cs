@@ -12,7 +12,7 @@ namespace SocketDoudizhuServer.Servers
 {
     class Server
     {
-        public UserData userData;
+        UserData userData;
         ControllerManager controllerManager;
         Socket socket;
         EndPoint localIP;
@@ -24,6 +24,7 @@ namespace SocketDoudizhuServer.Servers
 
         public static Server Instance { get => instance; }
         public ControllerManager ControllerManager { get => controllerManager;  }
+        public UserData GetUserData { get => userData;}
 
         public Server( int port )
         {
@@ -69,6 +70,32 @@ namespace SocketDoudizhuServer.Servers
         public void HandleRequest( MainPack pack ,Client client) 
         {
             ControllerManager.HandleRequest(pack, client);
+        }
+
+        public Client GetClient( string username ) 
+        {
+
+            if ( !allClient.ContainsKey(username) ) 
+            {
+                return null;
+            }
+
+            return allClient[username];
+        
+        }
+        public void  AddClient( Client client )
+        {
+
+            if ( allClient.ContainsKey(client.username) )return;
+            if( allTempClient.Contains(client) )
+                allTempClient.Remove(client);
+            allClient.Add(client.username , client);
+        }
+        public void RemoveClient( string username )
+        {
+
+            if ( !allClient.ContainsKey(username) ) return;
+             allClient.Remove(username);
         }
     }
 }

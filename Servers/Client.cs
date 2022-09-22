@@ -11,6 +11,8 @@ using SocketDoudizhuServer.Controller;
 
 namespace SocketDoudizhuServer.Servers
 {
+
+   
     class Client
     {
         public MySqlConnection sqlConnection;
@@ -93,7 +95,8 @@ namespace SocketDoudizhuServer.Servers
         {
             Console.WriteLine("断开");
             if(room !=null)
-            room.Exit(this , out bool isExist);
+            room.Exit(username , out bool isExist);
+            state = 0;
             Console.WriteLine(room == null);
             if ( socket == null || socket.Connected == false ) 
             {

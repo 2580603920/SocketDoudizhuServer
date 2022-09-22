@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using SoketDoudizhuProtocol;
 using SocketDoudizhuServer.Servers;
+using SocketDoudizhuServer.DAO;
 
 namespace SocketDoudizhuServer.Controller
 {
@@ -10,12 +11,17 @@ namespace SocketDoudizhuServer.Controller
     {
         Dictionary<RequestCode , ControllerBase> allController;
         static ControllerManager instance;
-
+        Server server;
 
         UserController userController;
         RoomController roomController;
-
-
+        GameController gameController;
+        void InitialController( )
+        {
+            userController = new UserController();
+            roomController = new RoomController();
+            gameController = new GameController();
+        }
         public static ControllerManager Instance 
         {
 
@@ -31,15 +37,11 @@ namespace SocketDoudizhuServer.Controller
          ControllerManager( ) 
         {
             instance = this;
+            server = Server.Instance;
             allController = new Dictionary<RequestCode , ControllerBase>();
             InitialController();
         }
-        void InitialController( ) 
-        {
-            userController = new UserController();
-            roomController = new RoomController();
-
-        }
+       
 
         public void AddController( RequestCode requestCode, ControllerBase controller ) 
         {
@@ -58,6 +60,25 @@ namespace SocketDoudizhuServer.Controller
         public void HandleRequest( MainPack pack, Client client) 
         {
             allController[pack.Requestcode].HandleRequest(pack, client);
+        }
+
+        public Client GetClient( string username )
+        {
+
+            return server.GetClient(username);
+
+        }
+        public UserData  GetUserdata()
+        {
+            return server.GetUserData;
+        }
+        public void AddClient( Client client )
+        {
+            server.AddClient(client);
+        }
+        public void RemoveClient( string username )
+        {
+            server.RemoveClient(username);
         }
     }
 }

@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using System.Text;
 using SoketDoudizhuProtocol;
 using SocketDoudizhuServer.Servers;
+using SocketDoudizhuServer.DAO;
 
 namespace SocketDoudizhuServer.Controller
 {
     class ControllerBase 
     {
         public RequestCode requestCode;
-        public Server server;
+        public ControllerManager controllerManager;
+        
         //static ControllerBase instance;
 
         
@@ -33,8 +35,7 @@ namespace SocketDoudizhuServer.Controller
         }
         public virtual void Initial( ) 
         {
-           
-            server = Server.Instance;
+            controllerManager = ControllerManager.Instance;
         }
        
         public virtual void HandleRequest( MainPack pack ,Client client) 
@@ -42,7 +43,17 @@ namespace SocketDoudizhuServer.Controller
         
             
         }
+        public Client GetClient( string username )
+        {
 
+            return controllerManager.GetClient(username);
+
+        }
+        public UserData GetUserdata( )
+        {
+            return  controllerManager.GetUserdata();
+
+        }
 
     }
 }

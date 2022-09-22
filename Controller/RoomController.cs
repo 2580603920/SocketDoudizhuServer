@@ -92,8 +92,10 @@ namespace SocketDoudizhuServer.Controller
                         MainPack pack1 = new MainPack();
                         pack1.Requestcode = requestCode;
                         pack1.Actioncode = ActionCode.GetRoomInfo;
+                        pack1.Returncode = ReturnCode.Success;
                         RoomInfo info1 = new RoomInfo();
-                        info.Roomid = pack.Roominfo[0].Roomid;
+                        info1.Roomid = pack.Roominfo[0].Roomid;
+                        info1.Landlord = client.room.hostname;
 
                         foreach ( var item in GetRoomInfo(pack.Roominfo[0].Roomid) )
                         {
@@ -101,30 +103,15 @@ namespace SocketDoudizhuServer.Controller
 
 
                         }
-                        pack1.Roominfo.Add(info1);
+                            pack1.Roominfo.Add(info1);
 
-                        allRoom[pack.Roominfo[0].Roomid].BoredCast(pack1 , client);
+                        allRoom[pack.Roominfo[0].Roomid].BoredCast(pack1 , client.username);
                         break;
 
                     }
                 case ActionCode.GetRoomInfo:
                     {
-                        MainPack returnPack = new MainPack();
-                        returnPack.Requestcode = pack.Requestcode;
-                        returnPack.Actioncode = pack.Actioncode;
-
-                        RoomInfo info = new RoomInfo();
-                        info.Roomid = pack.Roominfo[0].Roomid;
-                        
-                        foreach ( var item in GetRoomInfo(pack.Roominfo[0].Roomid) )                         
-                        {
-                            info.Playerinfo.Add(item);
-
-                        }
-                       
-                       
-                        returnPack.Roominfo.Add(info);
-                        client.Send(returnPack);
+                        HandleGetRoomInfo(client , pack);
                         break;
                     }
                 case ActionCode.ExitRoom: 
@@ -134,11 +121,12 @@ namespace SocketDoudizhuServer.Controller
                     }
             }
         }
-        RepeatedField<PlayerInfo> GetRoomInfo(string roomId ) 
+        RepeatedField<PlayerInfo> GetRoomInfo(string roomID ) 
         {
           
-               return allRoom[roomId].GetClientInfo();
+               return allRoom[roomID].GetClientInfo();
         }
+        //获取房间列表
         public void GetRoomList( RepeatedField<RoomInfo> roomInfos) 
         {
 
@@ -157,7 +145,42 @@ namespace SocketDoudizhuServer.Controller
 
           
         }
+        //处理获取房间信息请求
+        void HandleGetRoomInfo( Client client,MainPack pack ) 
+        {
+            string roomID = pack.Roominfo[0].Roomid;
 
+            MainPack returnPack = new MainPack();
+            returnPack.Requestcode = requestCode;
+            returnPack.Actioncode = pack.Actioncode;
+
+            if ( allRoom.ContainsKey(roomID) )
+            {
+                returnPack.Returncode = ReturnCode.Success;
+
+                RoomInfo info = new RoomInfo();
+                info.Roomid = roomID;
+                info.Status = allRoom[roomID].status;
+                info.Landlord = allRoom[roomID].hostname;
+                foreach ( var item in GetRoomInfo(roomID) )
+                {
+                    info.Playerinfo.Add(item);
+
+                }
+                returnPack.Roominfo.Add(info);
+            }
+            else 
+            {
+
+                returnPack.Returncode = ReturnCode.Fail;
+            }
+            
+
+
+           
+            client.Send(returnPack);
+
+        }
         //退出房间
         public void  ExitRoom(Client client,MainPack pack ) 
         {
@@ -167,7 +190,7 @@ namespace SocketDoudizhuServer.Controller
             returnPack.Actioncode = pack.Actioncode;
 
             bool isExist = false;
-            if ( allRoom.ContainsKey(pack.Roominfo[0].Roomid) && allRoom[pack.Roominfo[0].Roomid].Exit(client , out isExist) )
+            if ( allRoom.ContainsKey(pack.Roominfo[0].Roomid) && allRoom[pack.Roominfo[0].Roomid].Exit(client.username , out isExist) )
             {
                 returnPack.Returncode = ReturnCode.Success;
 
@@ -191,7 +214,7 @@ namespace SocketDoudizhuServer.Controller
                     }
                     pack1.Roominfo.Add(info);
 
-                    allRoom[pack.Roominfo[0].Roomid].BoredCast(pack1 , client);
+                    allRoom[pack.Roominfo[0].Roomid].BoredCast(pack1 , client.username);
                 }
 
             }

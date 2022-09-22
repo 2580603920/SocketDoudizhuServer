@@ -5,29 +5,56 @@ using SoketDoudizhuProtocol;
 using Google.Protobuf.Collections;
 using SocketDoudizhuServer.Controller;
 using System.Linq;
+using System.Threading;
 
 namespace SocketDoudizhuServer.Servers
 {
     class Room
     {
-        public List<Client> clients;
+        public List<string> curRoomClientNames;
         public RoomController roomController;
-        Dealer dealer;
 
+        #region 游戏相关
+        Dealer dealer;
+        //地主候选队列
+        Queue<int> diZhuIndex;
+        //当前回合玩家的索引
+        int curBoutPlayerIndex = 0;
+        //地主
+        string diZhuName;
+        public string DiZhuName { get { return diZhuName; } }
+        public int CurBoutPlayerIndex { get { return curBoutPlayerIndex; }}
+        //上回合回合玩家的索引
+        int LastBoutPlayerIndex = -1;
+        //回合数
+        int BoutNum;
+        public int GetBoutNum { get { return BoutNum; } }
+        //回合时间计时器
+        int timer = -1;
+        public int Timer { get { return timer; } }
+        //回合时间
+        int boutTime = 20;
+        //游戏状态, 0,表示游戏结束，1表示游戏开始，2表示游戏在抢地主阶段，3表示游戏正在进行，4表示游戏失败，5表示游戏胜利
+        int gameStatus;
+        public int GameStatus { get { return gameStatus; } }
+        #endregion
         //通信数据
         public string hostname;
         public int maxClientNum=3;
         public int curClientNum=0;
         public string roomID;
         public string roomTitle;
+        //房间状态：0房间不存在，1房间可加入，2房间已满，3房间已经开始游戏
         public int status;
+
+      
        
         
         public Room(Client host ,string roomID,string roomTitle) 
         {
             roomController = ControllerManager.Instance.GetController<RoomController>(RequestCode.Room);
             roomController.RegisterRoom(roomID , this);
-            clients = new List<Client>();
+            curRoomClientNames = new List<string>();
             this.roomID = roomID;
             this.roomTitle = roomTitle;
             hostname = host.username;
@@ -39,7 +66,7 @@ namespace SocketDoudizhuServer.Servers
         public ReturnCode Join( Client client )
         {
           
-            if ( clients.Contains(client)) return ReturnCode.Fail;
+            if ( curRoomClientNames.Contains(client.username) ) return ReturnCode.Fail;
             if ( curClientNum + 1 > maxClientNum ) 
             {
                 status = 2;
@@ -47,40 +74,36 @@ namespace SocketDoudizhuServer.Servers
             }
             client.room = this;
              curClientNum++;
-            clients.Add(client);
+            curRoomClientNames.Add(client.username);
            
             return ReturnCode.Success;
         }
         public void  Destroy( ) 
         {
-            foreach ( var item in clients ) 
+            foreach ( var item in curRoomClientNames ) 
             {
               
-                if ( item.room == null ) continue;
-                item.room = null;
+                if ( roomController.GetClient(item).room == null ) continue;
+                roomController.GetClient(item).room = null;
             
             }
 
-            clients.Clear();
+            curRoomClientNames.Clear();
             roomController.UnRegisterRoom(roomID);
         }
-        public void ReplaceClient(Client oldClient,Client newcCient ) 
-        {
-            clients[clients.IndexOf(oldClient)] = newcCient;
-
-        }
-        public bool Exit(Client client,out bool isExist ) 
+        
+        public bool Exit(string username,out bool isExist ) 
         {
             isExist = true;
             if ( status == 3 ) return false;
-            if ( !clients.Contains(client) ) return true;
+            if ( !curRoomClientNames.Contains(username) ) return true;
 
             curClientNum--;
-            clients.Remove(client);
-            client.room = null;
+            curRoomClientNames.Remove(username);
+            roomController.GetClient(username).room = null;
 
             //房主退出房间
-            if ( client.username == hostname || curClientNum <= 0 ) 
+            if ( username == hostname || curClientNum <= 0 ) 
             {
                 isExist = false;
                 //通知房间其他人房间解散
@@ -91,7 +114,7 @@ namespace SocketDoudizhuServer.Servers
                 RoomInfo info = new RoomInfo();
                 info.Roomid = roomID;
                 pack1.Roominfo.Add(info);
-                BoredCast(pack1,client);
+                BoredCast(pack1, username);
                 Destroy();
 
             } 
@@ -101,14 +124,14 @@ namespace SocketDoudizhuServer.Servers
         public RepeatedField<PlayerInfo> GetClientInfo() 
         {
             RepeatedField<PlayerInfo> playerInfos = new RepeatedField<PlayerInfo>();
-            foreach ( var item in clients ) 
+            foreach ( var item in curRoomClientNames ) 
            
             {
               
                 PlayerInfo info = new PlayerInfo();
-                info.Username = item.username;
+                info.Username = item;
                 info.Coin = "1000";
-                info.Status = item.state;
+                info.Status =roomController.GetClient(item).state;
                 playerInfos.Add(info);
               
             }
@@ -116,40 +139,167 @@ namespace SocketDoudizhuServer.Servers
             return playerInfos;
 
         }
-        public void BoredCast(MainPack pack,Client ignoreClient=null ) 
+        public void BoredCast(MainPack pack,string ignoreUser = null ) 
         {
-            foreach ( var item in clients )
+            foreach ( var item in curRoomClientNames )
             {
-                if ( item.Equals(ignoreClient) || item == null) continue;
-                item.Send(pack);
+                
+                if ( item.Equals(ignoreUser) ) continue;
+                roomController.GetClient(item).Send(pack);
             }
 
         }
-        public bool StartGame( ) 
+        public bool StartGame(string username) 
         {
-            if ( status == 3  ) return false;
+            if ( status == 3 || username != hostname ||curClientNum != 3) return false;
+            
+            gameStatus = 1;
             status = 3;
             dealer = new Dealer();
             dealer.Initial();
+            DealPorker(username);
+            gameStatus = 2;//抢地主阶段
+            diZhuIndex = new Queue<int>();
+            return true;
+        }
+        //发牌
+        public void DealPorker( string username ) 
+        {
+        
+           
+            dealer.DealPorker();
+
+            //给房间内的玩家发送自己分配到的牌组 i代表玩家索引
+            for ( int i = 0 ; i < curRoomClientNames.Count ; i++ ) 
+            {
+                MainPack pack = new MainPack();
+                pack.Returncode = ReturnCode.Success;
+                pack.Requestcode = RequestCode.Game;
+                pack.Actioncode = ActionCode.GetGameInfo;
+
+              
+                GameInfo gameInfo = new GameInfo();
+                gameInfo.Status = gameStatus; //游戏开始阶段
+
+                //写入房间内玩家的信息
+            
+                GetPlayerPokers(gameInfo.Playerinfo,i);
+
+                pack.Gameinfo = gameInfo;
+
+                roomController.GetClient(curRoomClientNames[i]).Send(pack);
+
+            }
+           
+
+        }
+
+      
+        //获取玩家牌组信息，指定要明牌玩家的索引
+        public void GetPlayerPokers(RepeatedField<PlayerInfo> playerInfos ,int index) 
+        {
+          
+                for ( int j = 0 ; j < curRoomClientNames.Count ; j++ )
+                {
+                    PlayerInfo playerInfo = new PlayerInfo();
+                    playerInfo.Username = curRoomClientNames[j];
+                    playerInfo.Curpokernum = dealer.allPlayerPoker[j].Count;
+
+                    //取对应玩家的牌组
+                    if ( j == index)
+                    {
+
+                        foreach ( var item in dealer.allPlayerPoker[j] )
+                        {
+                            Poker poker = new Poker();
+                            poker.Weight = item.weight;
+
+                            poker.Pokercolor = (int) item.pokerColor + 1;//1梅花、2方块、3红桃、4黑桃
+                            playerInfo.Poker.Add(poker);
+                        }
+                    }
+                    playerInfos.Add(playerInfo);
+                }
+               
+
+            
+
+        }
+        //抢地主
+        public bool RobDizhu( string username ,bool isRobDizhu = true )
+        {
+            if ( curRoomClientNames[curBoutPlayerIndex] != username || gameStatus != 2) return false;
+            if ( isRobDizhu )
+                diZhuIndex.Enqueue(curRoomClientNames.IndexOf(username));
+            else 
+            {
+                //地主不叫
+                if ( diZhuIndex.Count != 0 && username == hostname)
+                    diZhuIndex.Dequeue();
+            }
+            
+            curBoutPlayerIndex = ( curBoutPlayerIndex + 1 ) % 3;
 
             return true;
         }
-        public void DealPorker( ) 
-        {
-            dealer.DealPorker();
 
-            for ( int i = 0 ; i < clients.Count ; i++ ) 
+        //调用一次减少一秒
+        public void Update() 
+        {
+            if ( timer == 0 ) //回合结束
             {
-                //MainPack pack = new MainPack();
-                //pack.Requestcode = RequestCode.Game;
-                //pack.Actioncode = ActionCode
-                //dealer.allPlayerPoker[i];
-                //clients[i].Send();
-            
+                curBoutPlayerIndex = ( curBoutPlayerIndex + 1 ) % 3;
+
             }
-           
+            //新回合开始
+            if ( curBoutPlayerIndex != LastBoutPlayerIndex ) 
+            {
+                BoutNum++;
+                LastBoutPlayerIndex = curBoutPlayerIndex;
+                timer = boutTime+1;
+            }
+
+            // 抢地主阶段结束处理事件
+            if ( BoutNum == 4 && timer == boutTime + 1 ) 
+                {   
+                    // 有人叫或抢过
+                    if ( diZhuIndex.Count != 0 )
+                    {
+
+                        diZhuName = curRoomClientNames[diZhuIndex.Peek()];
+                        curBoutPlayerIndex = diZhuIndex.Peek();
+
+                    }
+                    //无人叫或抢过
+                    else
+                    {
+
+                        diZhuName = hostname;
+                        curBoutPlayerIndex = 0;
+                    }
+                    LastBoutPlayerIndex = curBoutPlayerIndex;
+
+                    diZhuIndex.Clear();
+                    dealer.allPlayerPoker[curRoomClientNames.IndexOf(diZhuName)] = dealer.allPlayerPoker[curRoomClientNames.IndexOf(diZhuName)].Concat(dealer.diZhuPai).ToList(); // 将地主牌插入地主玩家牌组
+                    dealer.SortPork(dealer.allPlayerPoker[curRoomClientNames.IndexOf(diZhuName)]);
+
+                    gameStatus = 3; 
+                } 
+
+            
+            timer--;
+            //回合时间耗尽，进入下一个玩家回合
+          
+
+
         }
+
+        public List<Dealer.Poker> GetDiZhuPokers( ) 
+        {
+            return dealer.diZhuPai;
         
+        }
+
     }
 
     public class Dealer
@@ -669,15 +819,18 @@ namespace SocketDoudizhuServer.Servers
                         break;
 
                 }
-                while ( forDealPorks.Count != 0 )
-                {
-                                      
-                    diZhuPai.Add(forDealPorks.Dequeue());
+            }
+            while ( forDealPorks.Count != 0 )
+            {
 
-                }
+                diZhuPai.Add(forDealPorks.Dequeue());
 
             }
-            
+            SortPork(player1Pokers);
+            SortPork(player2Pokers);
+            SortPork(player3Pokers);
+            SortPork(diZhuPai);
+
         }
 
         //清理
