@@ -30,42 +30,46 @@ namespace SoketDoudizhuProtocol {
             "Y29sb3IYAiABKAUijgEKClBsYXllckluZm8SEAoIdXNlcm5hbWUYASABKAkS",
             "DAoEY29pbhgCIAEoCRIOCgZzdGF0dXMYAyABKAUSKwoFcG9rZXIYBCADKAsy",
             "HC5Tb2tldERvdWRpemh1UHJvdG9jb2wuUG9rZXISEwoLY3VycG9rZXJudW0Y",
-            "BSABKAUSDgoGcm9vbWlkGAYgASgJIpgBCghSb29tSW5mbxIQCghsYW5kbG9y",
-            "ZBgBIAEoCRIRCglwbGF5ZXJudW0YAiABKAUSEAoIcm9vbXRpbGUYAyABKAkS",
-            "DgoGc3RhdHVzGAQgASgFEg4KBnJvb21pZBgFIAEoCRI1CgpwbGF5ZXJpbmZv",
-            "GAYgAygLMiEuU29rZXREb3VkaXpodVByb3RvY29sLlBsYXllckluZm8iywEK",
-            "CEdhbWVJbmZvEg4KBnN0YXR1cxgBIAEoBRITCgtjdXJ1c2VybmFtZRgCIAEo",
-            "CRITCgtwbGF5ZXJ0aW1lcxgDIAEoBRINCgV0aW1lcxgEIAEoBRI1CgpwbGF5",
-            "ZXJpbmZvGAYgAygLMiEuU29rZXREb3VkaXpodVByb3RvY29sLlBsYXllcklu",
-            "Zm8SDQoFZGl6aHUYByABKAkSMAoKZGl6aHVwb2tlchgIIAMoCzIcLlNva2V0",
-            "RG91ZGl6aHVQcm90b2NvbC5Qb2tlciKDAwoITWFpblBhY2sSNwoLcmVxdWVz",
-            "dGNvZGUYASABKA4yIi5Tb2tldERvdWRpemh1UHJvdG9jb2wuUmVxdWVzdENv",
-            "ZGUSNQoKYWN0aW9uY29kZRgCIAEoDjIhLlNva2V0RG91ZGl6aHVQcm90b2Nv",
-            "bC5BY3Rpb25Db2RlEjUKCnJldHVybmNvZGUYAyABKA4yIS5Tb2tldERvdWRp",
-            "emh1UHJvdG9jb2wuUmV0dXJuQ29kZRIzCglsb2dpbnBhY2sYBCABKAsyIC5T",
-            "b2tldERvdWRpemh1UHJvdG9jb2wuTG9naW5QYWNrEjEKCHJvb21pbmZvGAUg",
-            "AygLMh8uU29rZXREb3VkaXpodVByb3RvY29sLlJvb21JbmZvEjUKCnBsYXll",
-            "cmluZm8YBiADKAsyIS5Tb2tldERvdWRpemh1UHJvdG9jb2wuUGxheWVySW5m",
-            "bxIxCghnYW1laW5mbxgHIAEoCzIfLlNva2V0RG91ZGl6aHVQcm90b2NvbC5H",
-            "YW1lSW5mbypGCgtSZXF1ZXN0Q29kZRIPCgtSZXF1ZXN0Tm9uZRAAEggKBFVz",
-            "ZXIQARIICgRSb29tEAISCAoER2FtZRADEggKBENoYXQQBCrrAQoKQWN0aW9u",
-            "Q29kZRIOCgpBY3Rpb25Ob25lEAASCQoFTG9naW4QARIMCghSZWdpc3RlchAC",
-            "Eg8KC0dldFJvb21MaXN0EAMSDgoKQ3JlYXRlUm9vbRAEEgwKCEpvaW5Sb29t",
-            "EAUSDAoIRXhpdFJvb20QBhIPCgtHZXRSb29tSW5mbxAHEgwKCFNlbmRUZXh0",
-            "EAgSDQoJQ291bnREb3duEAkSDQoJU3RhcnRHYW1lEAoSDQoJRGVhbFBva2Vy",
-            "EAsSDwoLR2V0R2FtZUluZm8QDBILCgdSb2JIb3N0EA0SDQoJU2VuZFBva2Vy",
-            "EA4qUwoKUmV0dXJuQ29kZRIOCgpSZXR1cm5Ob25lEAASCwoHU3VjY2VzcxAB",
-            "EggKBEZhaWwQAhIMCghSb29tRnVsbBADEhAKDFJvb21EaXNzb2x2ZRAEYgZw",
-            "cm90bzM="));
+            "BSABKAUSDgoGcm9vbWlkGAYgASgJImcKDlNlbmRQb2tlcnNJbmZvEisKBXBv",
+            "a2VyGAEgAygLMhwuU29rZXREb3VkaXpodVByb3RvY29sLlBva2VyEhYKDnBv",
+            "a2VyVHlwZVV0aWxzGAIgASgFEhAKCHVzZXJuYW1lGAMgASgJIpgBCghSb29t",
+            "SW5mbxIQCghsYW5kbG9yZBgBIAEoCRIRCglwbGF5ZXJudW0YAiABKAUSEAoI",
+            "cm9vbXRpbGUYAyABKAkSDgoGc3RhdHVzGAQgASgFEg4KBnJvb21pZBgFIAEo",
+            "CRI1CgpwbGF5ZXJpbmZvGAYgAygLMiEuU29rZXREb3VkaXpodVByb3RvY29s",
+            "LlBsYXllckluZm8iywEKCEdhbWVJbmZvEg4KBnN0YXR1cxgBIAEoBRITCgtj",
+            "dXJ1c2VybmFtZRgCIAEoCRITCgtwbGF5ZXJ0aW1lcxgDIAEoBRINCgV0aW1l",
+            "cxgEIAEoBRI1CgpwbGF5ZXJpbmZvGAYgAygLMiEuU29rZXREb3VkaXpodVBy",
+            "b3RvY29sLlBsYXllckluZm8SDQoFZGl6aHUYByABKAkSMAoKZGl6aHVwb2tl",
+            "chgIIAMoCzIcLlNva2V0RG91ZGl6aHVQcm90b2NvbC5Qb2tlciLCAwoITWFp",
+            "blBhY2sSNwoLcmVxdWVzdGNvZGUYASABKA4yIi5Tb2tldERvdWRpemh1UHJv",
+            "dG9jb2wuUmVxdWVzdENvZGUSNQoKYWN0aW9uY29kZRgCIAEoDjIhLlNva2V0",
+            "RG91ZGl6aHVQcm90b2NvbC5BY3Rpb25Db2RlEjUKCnJldHVybmNvZGUYAyAB",
+            "KA4yIS5Tb2tldERvdWRpemh1UHJvdG9jb2wuUmV0dXJuQ29kZRIzCglsb2dp",
+            "bnBhY2sYBCABKAsyIC5Tb2tldERvdWRpemh1UHJvdG9jb2wuTG9naW5QYWNr",
+            "EjEKCHJvb21pbmZvGAUgAygLMh8uU29rZXREb3VkaXpodVByb3RvY29sLlJv",
+            "b21JbmZvEjUKCnBsYXllcmluZm8YBiADKAsyIS5Tb2tldERvdWRpemh1UHJv",
+            "dG9jb2wuUGxheWVySW5mbxIxCghnYW1laW5mbxgHIAEoCzIfLlNva2V0RG91",
+            "ZGl6aHVQcm90b2NvbC5HYW1lSW5mbxI9Cg5zZW5kcG9rZXJzaW5mbxgIIAMo",
+            "CzIlLlNva2V0RG91ZGl6aHVQcm90b2NvbC5TZW5kUG9rZXJzSW5mbypGCgtS",
+            "ZXF1ZXN0Q29kZRIPCgtSZXF1ZXN0Tm9uZRAAEggKBFVzZXIQARIICgRSb29t",
+            "EAISCAoER2FtZRADEggKBENoYXQQBCrrAQoKQWN0aW9uQ29kZRIOCgpBY3Rp",
+            "b25Ob25lEAASCQoFTG9naW4QARIMCghSZWdpc3RlchACEg8KC0dldFJvb21M",
+            "aXN0EAMSDgoKQ3JlYXRlUm9vbRAEEgwKCEpvaW5Sb29tEAUSDAoIRXhpdFJv",
+            "b20QBhIPCgtHZXRSb29tSW5mbxAHEgwKCFNlbmRUZXh0EAgSDQoJQ291bnRE",
+            "b3duEAkSDQoJU3RhcnRHYW1lEAoSDQoJRGVhbFBva2VyEAsSDwoLR2V0R2Ft",
+            "ZUluZm8QDBILCgdSb2JIb3N0EA0SDQoJU2VuZFBva2VyEA4qUwoKUmV0dXJu",
+            "Q29kZRIOCgpSZXR1cm5Ob25lEAASCwoHU3VjY2VzcxABEggKBEZhaWwQAhIM",
+            "CghSb29tRnVsbBADEhAKDFJvb21EaXNzb2x2ZRAEYgZwcm90bzM="));
       descriptor = pbr::FileDescriptor.FromGeneratedCode(descriptorData,
           new pbr::FileDescriptor[] { },
           new pbr::GeneratedClrTypeInfo(new[] {typeof(global::SoketDoudizhuProtocol.RequestCode), typeof(global::SoketDoudizhuProtocol.ActionCode), typeof(global::SoketDoudizhuProtocol.ReturnCode), }, null, new pbr::GeneratedClrTypeInfo[] {
             new pbr::GeneratedClrTypeInfo(typeof(global::SoketDoudizhuProtocol.LoginPack), global::SoketDoudizhuProtocol.LoginPack.Parser, new[]{ "Username", "Password" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::SoketDoudizhuProtocol.Poker), global::SoketDoudizhuProtocol.Poker.Parser, new[]{ "Weight", "Pokercolor" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::SoketDoudizhuProtocol.PlayerInfo), global::SoketDoudizhuProtocol.PlayerInfo.Parser, new[]{ "Username", "Coin", "Status", "Poker", "Curpokernum", "Roomid" }, null, null, null, null),
+            new pbr::GeneratedClrTypeInfo(typeof(global::SoketDoudizhuProtocol.SendPokersInfo), global::SoketDoudizhuProtocol.SendPokersInfo.Parser, new[]{ "Poker", "PokerTypeUtils", "Username" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::SoketDoudizhuProtocol.RoomInfo), global::SoketDoudizhuProtocol.RoomInfo.Parser, new[]{ "Landlord", "Playernum", "Roomtile", "Status", "Roomid", "Playerinfo" }, null, null, null, null),
             new pbr::GeneratedClrTypeInfo(typeof(global::SoketDoudizhuProtocol.GameInfo), global::SoketDoudizhuProtocol.GameInfo.Parser, new[]{ "Status", "Curusername", "Playertimes", "Times", "Playerinfo", "Dizhu", "Dizhupoker" }, null, null, null, null),
-            new pbr::GeneratedClrTypeInfo(typeof(global::SoketDoudizhuProtocol.MainPack), global::SoketDoudizhuProtocol.MainPack.Parser, new[]{ "Requestcode", "Actioncode", "Returncode", "Loginpack", "Roominfo", "Playerinfo", "Gameinfo" }, null, null, null, null)
+            new pbr::GeneratedClrTypeInfo(typeof(global::SoketDoudizhuProtocol.MainPack), global::SoketDoudizhuProtocol.MainPack.Parser, new[]{ "Requestcode", "Actioncode", "Returncode", "Loginpack", "Roominfo", "Playerinfo", "Gameinfo", "Sendpokersinfo" }, null, null, null, null)
           }));
     }
     #endregion
@@ -135,7 +139,7 @@ namespace SoketDoudizhuProtocol {
     /// </summary>
     [pbr::OriginalName("StartGame")] StartGame = 10,
     /// <summary>
-    ///发牌,只能由房主发起请求
+    ///发牌请求
     /// </summary>
     [pbr::OriginalName("DealPoker")] DealPoker = 11,
     /// <summary>
@@ -762,6 +766,186 @@ namespace SoketDoudizhuProtocol {
 
   }
 
+  /// <summary>
+  ///玩家出牌信息
+  /// </summary>
+  public sealed partial class SendPokersInfo : pb::IMessage<SendPokersInfo> {
+    private static readonly pb::MessageParser<SendPokersInfo> _parser = new pb::MessageParser<SendPokersInfo>(() => new SendPokersInfo());
+    private pb::UnknownFieldSet _unknownFields;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pb::MessageParser<SendPokersInfo> Parser { get { return _parser; } }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public static pbr::MessageDescriptor Descriptor {
+      get { return global::SoketDoudizhuProtocol.SoketDoudizhuProtocolReflection.Descriptor.MessageTypes[3]; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    pbr::MessageDescriptor pb::IMessage.Descriptor {
+      get { return Descriptor; }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SendPokersInfo() {
+      OnConstruction();
+    }
+
+    partial void OnConstruction();
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SendPokersInfo(SendPokersInfo other) : this() {
+      poker_ = other.poker_.Clone();
+      pokerTypeUtils_ = other.pokerTypeUtils_;
+      username_ = other.username_;
+      _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public SendPokersInfo Clone() {
+      return new SendPokersInfo(this);
+    }
+
+    /// <summary>Field number for the "poker" field.</summary>
+    public const int PokerFieldNumber = 1;
+    private static readonly pb::FieldCodec<global::SoketDoudizhuProtocol.Poker> _repeated_poker_codec
+        = pb::FieldCodec.ForMessage(10, global::SoketDoudizhuProtocol.Poker.Parser);
+    private readonly pbc::RepeatedField<global::SoketDoudizhuProtocol.Poker> poker_ = new pbc::RepeatedField<global::SoketDoudizhuProtocol.Poker>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::SoketDoudizhuProtocol.Poker> Poker {
+      get { return poker_; }
+    }
+
+    /// <summary>Field number for the "pokerTypeUtils" field.</summary>
+    public const int PokerTypeUtilsFieldNumber = 2;
+    private int pokerTypeUtils_;
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int PokerTypeUtils {
+      get { return pokerTypeUtils_; }
+      set {
+        pokerTypeUtils_ = value;
+      }
+    }
+
+    /// <summary>Field number for the "username" field.</summary>
+    public const int UsernameFieldNumber = 3;
+    private string username_ = "";
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public string Username {
+      get { return username_; }
+      set {
+        username_ = pb::ProtoPreconditions.CheckNotNull(value, "value");
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override bool Equals(object other) {
+      return Equals(other as SendPokersInfo);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public bool Equals(SendPokersInfo other) {
+      if (ReferenceEquals(other, null)) {
+        return false;
+      }
+      if (ReferenceEquals(other, this)) {
+        return true;
+      }
+      if(!poker_.Equals(other.poker_)) return false;
+      if (PokerTypeUtils != other.PokerTypeUtils) return false;
+      if (Username != other.Username) return false;
+      return Equals(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override int GetHashCode() {
+      int hash = 1;
+      hash ^= poker_.GetHashCode();
+      if (PokerTypeUtils != 0) hash ^= PokerTypeUtils.GetHashCode();
+      if (Username.Length != 0) hash ^= Username.GetHashCode();
+      if (_unknownFields != null) {
+        hash ^= _unknownFields.GetHashCode();
+      }
+      return hash;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public override string ToString() {
+      return pb::JsonFormatter.ToDiagnosticString(this);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void WriteTo(pb::CodedOutputStream output) {
+      poker_.WriteTo(output, _repeated_poker_codec);
+      if (PokerTypeUtils != 0) {
+        output.WriteRawTag(16);
+        output.WriteInt32(PokerTypeUtils);
+      }
+      if (Username.Length != 0) {
+        output.WriteRawTag(26);
+        output.WriteString(Username);
+      }
+      if (_unknownFields != null) {
+        _unknownFields.WriteTo(output);
+      }
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public int CalculateSize() {
+      int size = 0;
+      size += poker_.CalculateSize(_repeated_poker_codec);
+      if (PokerTypeUtils != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeInt32Size(PokerTypeUtils);
+      }
+      if (Username.Length != 0) {
+        size += 1 + pb::CodedOutputStream.ComputeStringSize(Username);
+      }
+      if (_unknownFields != null) {
+        size += _unknownFields.CalculateSize();
+      }
+      return size;
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(SendPokersInfo other) {
+      if (other == null) {
+        return;
+      }
+      poker_.Add(other.poker_);
+      if (other.PokerTypeUtils != 0) {
+        PokerTypeUtils = other.PokerTypeUtils;
+      }
+      if (other.Username.Length != 0) {
+        Username = other.Username;
+      }
+      _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
+    }
+
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public void MergeFrom(pb::CodedInputStream input) {
+      uint tag;
+      while ((tag = input.ReadTag()) != 0) {
+        switch(tag) {
+          default:
+            _unknownFields = pb::UnknownFieldSet.MergeFieldFrom(_unknownFields, input);
+            break;
+          case 10: {
+            poker_.AddEntriesFrom(input, _repeated_poker_codec);
+            break;
+          }
+          case 16: {
+            PokerTypeUtils = input.ReadInt32();
+            break;
+          }
+          case 26: {
+            Username = input.ReadString();
+            break;
+          }
+        }
+      }
+    }
+
+  }
+
   public sealed partial class RoomInfo : pb::IMessage<RoomInfo> {
     private static readonly pb::MessageParser<RoomInfo> _parser = new pb::MessageParser<RoomInfo>(() => new RoomInfo());
     private pb::UnknownFieldSet _unknownFields;
@@ -770,7 +954,7 @@ namespace SoketDoudizhuProtocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::SoketDoudizhuProtocol.SoketDoudizhuProtocolReflection.Descriptor.MessageTypes[3]; }
+      get { return global::SoketDoudizhuProtocol.SoketDoudizhuProtocolReflection.Descriptor.MessageTypes[4]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1049,7 +1233,7 @@ namespace SoketDoudizhuProtocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::SoketDoudizhuProtocol.SoketDoudizhuProtocolReflection.Descriptor.MessageTypes[4]; }
+      get { return global::SoketDoudizhuProtocol.SoketDoudizhuProtocolReflection.Descriptor.MessageTypes[5]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1351,7 +1535,7 @@ namespace SoketDoudizhuProtocol {
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public static pbr::MessageDescriptor Descriptor {
-      get { return global::SoketDoudizhuProtocol.SoketDoudizhuProtocolReflection.Descriptor.MessageTypes[5]; }
+      get { return global::SoketDoudizhuProtocol.SoketDoudizhuProtocolReflection.Descriptor.MessageTypes[6]; }
     }
 
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
@@ -1375,6 +1559,7 @@ namespace SoketDoudizhuProtocol {
       roominfo_ = other.roominfo_.Clone();
       playerinfo_ = other.playerinfo_.Clone();
       gameinfo_ = other.gameinfo_ != null ? other.gameinfo_.Clone() : null;
+      sendpokersinfo_ = other.sendpokersinfo_.Clone();
       _unknownFields = pb::UnknownFieldSet.Clone(other._unknownFields);
     }
 
@@ -1467,6 +1652,16 @@ namespace SoketDoudizhuProtocol {
       }
     }
 
+    /// <summary>Field number for the "sendpokersinfo" field.</summary>
+    public const int SendpokersinfoFieldNumber = 8;
+    private static readonly pb::FieldCodec<global::SoketDoudizhuProtocol.SendPokersInfo> _repeated_sendpokersinfo_codec
+        = pb::FieldCodec.ForMessage(66, global::SoketDoudizhuProtocol.SendPokersInfo.Parser);
+    private readonly pbc::RepeatedField<global::SoketDoudizhuProtocol.SendPokersInfo> sendpokersinfo_ = new pbc::RepeatedField<global::SoketDoudizhuProtocol.SendPokersInfo>();
+    [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
+    public pbc::RepeatedField<global::SoketDoudizhuProtocol.SendPokersInfo> Sendpokersinfo {
+      get { return sendpokersinfo_; }
+    }
+
     [global::System.Diagnostics.DebuggerNonUserCodeAttribute]
     public override bool Equals(object other) {
       return Equals(other as MainPack);
@@ -1487,6 +1682,7 @@ namespace SoketDoudizhuProtocol {
       if(!roominfo_.Equals(other.roominfo_)) return false;
       if(!playerinfo_.Equals(other.playerinfo_)) return false;
       if (!object.Equals(Gameinfo, other.Gameinfo)) return false;
+      if(!sendpokersinfo_.Equals(other.sendpokersinfo_)) return false;
       return Equals(_unknownFields, other._unknownFields);
     }
 
@@ -1500,6 +1696,7 @@ namespace SoketDoudizhuProtocol {
       hash ^= roominfo_.GetHashCode();
       hash ^= playerinfo_.GetHashCode();
       if (gameinfo_ != null) hash ^= Gameinfo.GetHashCode();
+      hash ^= sendpokersinfo_.GetHashCode();
       if (_unknownFields != null) {
         hash ^= _unknownFields.GetHashCode();
       }
@@ -1535,6 +1732,7 @@ namespace SoketDoudizhuProtocol {
         output.WriteRawTag(58);
         output.WriteMessage(Gameinfo);
       }
+      sendpokersinfo_.WriteTo(output, _repeated_sendpokersinfo_codec);
       if (_unknownFields != null) {
         _unknownFields.WriteTo(output);
       }
@@ -1560,6 +1758,7 @@ namespace SoketDoudizhuProtocol {
       if (gameinfo_ != null) {
         size += 1 + pb::CodedOutputStream.ComputeMessageSize(Gameinfo);
       }
+      size += sendpokersinfo_.CalculateSize(_repeated_sendpokersinfo_codec);
       if (_unknownFields != null) {
         size += _unknownFields.CalculateSize();
       }
@@ -1594,6 +1793,7 @@ namespace SoketDoudizhuProtocol {
         }
         Gameinfo.MergeFrom(other.Gameinfo);
       }
+      sendpokersinfo_.Add(other.sendpokersinfo_);
       _unknownFields = pb::UnknownFieldSet.MergeFrom(_unknownFields, other._unknownFields);
     }
 
@@ -1637,6 +1837,10 @@ namespace SoketDoudizhuProtocol {
               Gameinfo = new global::SoketDoudizhuProtocol.GameInfo();
             }
             input.ReadMessage(Gameinfo);
+            break;
+          }
+          case 66: {
+            sendpokersinfo_.AddEntriesFrom(input, _repeated_sendpokersinfo_codec);
             break;
           }
         }

@@ -20,10 +20,11 @@ namespace SocketDoudizhuServer.Servers
         Queue<int> diZhuIndex;
         //当前回合玩家的索引
         int curBoutPlayerIndex = 0;
+        public int CurBoutPlayerIndex { get { return curBoutPlayerIndex; } }
         //地主
         string diZhuName;
         public string DiZhuName { get { return diZhuName; } }
-        public int CurBoutPlayerIndex { get { return curBoutPlayerIndex; }}
+        
         //上回合回合玩家的索引
         int LastBoutPlayerIndex = -1;
         //回合数
@@ -33,7 +34,10 @@ namespace SocketDoudizhuServer.Servers
         int timer = -1;
         public int Timer { get { return timer; } }
         //回合时间
-        int boutTime = 20;
+        int boutTime = 1000;
+        //轮次，3回合一轮
+        int round;
+        public int Round { get { return round; } }
         //游戏状态, 0,表示游戏结束，1表示游戏开始，2表示游戏在抢地主阶段，3表示游戏正在进行，4表示游戏失败，5表示游戏胜利
         int gameStatus;
         public int GameStatus { get { return gameStatus; } }
@@ -47,9 +51,11 @@ namespace SocketDoudizhuServer.Servers
         //房间状态：0房间不存在，1房间可加入，2房间已满，3房间已经开始游戏
         public int status;
 
-      
-       
-        
+        //此轮中上家出的最大牌
+        List<Dealer.Poker> lastSendPokers = null; 
+
+
+
         public Room(Client host ,string roomID,string roomTitle) 
         {
             roomController = ControllerManager.Instance.GetController<RoomController>(RequestCode.Room);
@@ -61,7 +67,6 @@ namespace SocketDoudizhuServer.Servers
             host.room = this;
             Join(host);
             status = 1;
-            
         }
         public ReturnCode Join( Client client )
         {
@@ -149,6 +154,8 @@ namespace SocketDoudizhuServer.Servers
             }
 
         }
+
+      
         public bool StartGame(string username) 
         {
             if ( status == 3 || username != hostname ||curClientNum != 3) return false;
@@ -156,18 +163,19 @@ namespace SocketDoudizhuServer.Servers
             gameStatus = 1;
             status = 3;
             dealer = new Dealer();
-            dealer.Initial();
-            DealPorker(username);
-            gameStatus = 2;//抢地主阶段
             diZhuIndex = new Queue<int>();
+            dealer.Initial();
+            dealer.DealPorker();
+            DealPorker(username , gameStatus);
+            gameStatus = 2;//抢地主阶段
+
+           
+           
             return true;
         }
-        //发牌
-        public void DealPorker( string username ) 
+        //发往客户端玩家手牌信息
+        public void DealPorker( string username,int gameStatus ) 
         {
-        
-           
-            dealer.DealPorker();
 
             //给房间内的玩家发送自己分配到的牌组 i代表玩家索引
             for ( int i = 0 ; i < curRoomClientNames.Count ; i++ ) 
@@ -194,19 +202,21 @@ namespace SocketDoudizhuServer.Servers
 
         }
 
-      
+
         //获取玩家牌组信息，指定要明牌玩家的索引
-        public void GetPlayerPokers(RepeatedField<PlayerInfo> playerInfos ,int index) 
+        public void GetPlayerPokers( RepeatedField<PlayerInfo> playerInfos , int getDetailIndex , int[] ignoreInfoIndex =null) 
         {
           
                 for ( int j = 0 ; j < curRoomClientNames.Count ; j++ )
                 {
+                    if( ignoreInfoIndex !=null)
+                        if ( ignoreInfoIndex.Contains(j) ) continue;
                     PlayerInfo playerInfo = new PlayerInfo();
                     playerInfo.Username = curRoomClientNames[j];
                     playerInfo.Curpokernum = dealer.allPlayerPoker[j].Count;
 
                     //取对应玩家的牌组
-                    if ( j == index)
+                    if ( j == getDetailIndex )
                     {
 
                         foreach ( var item in dealer.allPlayerPoker[j] )
@@ -237,26 +247,76 @@ namespace SocketDoudizhuServer.Servers
                 if ( diZhuIndex.Count != 0 && username == hostname)
                     diZhuIndex.Dequeue();
             }
-            
-            curBoutPlayerIndex = ( curBoutPlayerIndex + 1 ) % 3;
+
+            NextBout();
 
             return true;
         }
+       public void NextBout( ) 
+        {
+            curBoutPlayerIndex = ( curBoutPlayerIndex + 1 ) % 3;
+            timer = boutTime + 1;
+        }
 
+       
+        void RoundChange( ) 
+        {
+            //每轮开始没人接牌则清空桌面
+            if ( round > 2  && lastSendPokers == null) 
+            {
+                MainPack pack = new MainPack();
+                pack.Requestcode = RequestCode.Game;
+                pack.Actioncode = ActionCode.SendPoker;
+                pack.Returncode = ReturnCode.Success;
+                foreach (var item in curRoomClientNames) 
+                {
+                    SendPokersInfo sendPokersInfo = new SendPokersInfo();
+                    sendPokersInfo.Username = item;
+                    pack.Sendpokersinfo.Add(sendPokersInfo);
+
+                }
+                BoredCast(pack);
+               
+
+            }
+           
+        }
+        
         //调用一次减少一秒
         public void Update() 
         {
             if ( timer == 0 ) //回合结束
             {
-                curBoutPlayerIndex = ( curBoutPlayerIndex + 1 ) % 3;
 
+                curBoutPlayerIndex = ( curBoutPlayerIndex + 1 ) % 3;
+               
             }
             //新回合开始
             if ( curBoutPlayerIndex != LastBoutPlayerIndex ) 
             {
+                int newRound = ( BoutNum / 3 ) + 1;
+                if ( round != newRound )
+                {
+                    round = newRound;
+                    RoundChange();
+
+                }
                 BoutNum++;
+                
                 LastBoutPlayerIndex = curBoutPlayerIndex;
                 timer = boutTime+1;
+                if ( round != 1 ) 
+                {
+                    MainPack pack = new MainPack();
+                    pack.Requestcode = RequestCode.Game;
+                    pack.Actioncode = ActionCode.SendPoker;
+                    pack.Returncode = ReturnCode.Success;
+                    SendPokersInfo sendPokersInfo = new SendPokersInfo();
+                    sendPokersInfo.Username = curRoomClientNames[curBoutPlayerIndex];
+                    pack.Sendpokersinfo.Add(sendPokersInfo);
+                    roomController.GetClient(curRoomClientNames[curBoutPlayerIndex]).Send(pack);
+                }
+                
             }
 
             // 抢地主阶段结束处理事件
@@ -284,19 +344,210 @@ namespace SocketDoudizhuServer.Servers
                     dealer.SortPork(dealer.allPlayerPoker[curRoomClientNames.IndexOf(diZhuName)]);
 
                     gameStatus = 3; 
-                } 
+                }
 
-            
+            if ( timer == 1 ) 
+            {
+                //自动出牌
+                if ( lastSendPokers == null && gameStatus == 3 )
+                {
+                    MainPack pack = new MainPack();
+                    pack.Requestcode = RequestCode.Game;
+                    pack.Actioncode = ActionCode.SendPoker;
+                    SendPokersInfo sInfo = new SendPokersInfo();
+                    sInfo.Username = curRoomClientNames[curBoutPlayerIndex];
+
+                    Poker poker = new Poker();
+                    Dealer.Poker dPoker = dealer.allPlayerPoker[curBoutPlayerIndex].First();
+                    poker.Weight = dPoker.weight;
+                    poker.Pokercolor = (int)dPoker.pokerColor+1;
+                    sInfo.Poker.Add(poker);
+                    pack.Sendpokersinfo.Add(sInfo);
+                    ControllerManager.Instance.GetController<GameController>(RequestCode.Game).HandleRequest(pack , roomController.GetClient(sInfo.Username));
+
+                }
+            }
             timer--;
             //回合时间耗尽，进入下一个玩家回合
           
 
 
         }
-
+        void GameOver( ) 
+        {
+            timer = -1;
+            lastSendPokers = null;
+            BoutNum = 0;
+            LastBoutPlayerIndex = -1;
+            curBoutPlayerIndex = 0;
+            diZhuName = null;
+            gameStatus = 4;
+            status = 2;
+            dealer = null;
+            diZhuIndex.Clear();
+        }
         public List<Dealer.Poker> GetDiZhuPokers( ) 
         {
             return dealer.diZhuPai;
+        
+        }
+
+       
+        
+        Dictionary<string , Dictionary<int,List<Dealer.Poker>>> allPlayerSendPokers = new Dictionary<string , Dictionary<int , List<Dealer.Poker>>>();//所有玩家每轮已经出的牌
+        void AddSendPokers( string username , List<Dealer.Poker> pokers ) 
+        {
+            if ( allPlayerSendPokers.ContainsKey(username) == false ) 
+            {
+                allPlayerSendPokers.Add(username , new Dictionary<int, List<Dealer.Poker>>());
+            }
+            if ( allPlayerSendPokers[username].ContainsKey(round) == false ) 
+            {
+                allPlayerSendPokers[username].Add(round , pokers);
+            }
+            allPlayerSendPokers[username][round] = pokers;
+        }
+        public List<Dealer.Poker> GetSendPokers( string username , int roundNum ) 
+        {
+            List<Dealer.Poker> pokers = null;
+            if ( allPlayerSendPokers.ContainsKey(username) ) 
+            {
+
+                if ( allPlayerSendPokers[username].ContainsKey(roundNum) )
+                {
+                    pokers = allPlayerSendPokers[username][roundNum];
+                }
+            }
+           
+
+            return pokers;
+        }
+        //将包中的扑克数据转为Deal类中的扑克数据
+        Dealer.Poker ParseDealPoker( Poker packPoker) 
+        {
+            Dealer.Poker poker = new Dealer.Poker();
+            poker.weight = packPoker.Weight;
+            poker.pokerColor = (Dealer.PokerColor) ( packPoker.Pokercolor - 1 );
+            return poker;
+        }
+
+        //判断赢家
+        public bool JudgeWinner(string username ) 
+        {
+            if ( dealer.allPlayerPoker[curRoomClientNames.IndexOf(username)].Count == 0 ) 
+            {
+                GameOver();
+                
+                return true;
+            }
+            return false;
+
+
+        }
+        //玩家出牌
+        public bool PlayerSendPoker(string username,RepeatedField<Poker> pokers ,out Dealer.PokerTypeUtils typeUtils) 
+        {
+            if (  round > 2 && lastSendPokers == GetSendPokers(username , round - 1) ) lastSendPokers = null;
+            if ( lastSendPokers !=null)
+            Console.WriteLine(lastSendPokers[0].weight);
+
+            typeUtils = Dealer.PokerTypeUtils.None;
+            
+            //非本回合不能操作
+            if ( curRoomClientNames[curBoutPlayerIndex] != username ) return false;
+         
+            //一轮内其他玩家没有出牌（都要不起），自己不能不出牌
+            if ( pokers == null && lastSendPokers == null ) return false;
+            //本轮有上家出牌可以不出牌
+            if ( pokers == null && lastSendPokers != null ) return true;
+           
+
+            List<Dealer.Poker> tempPokers = new List<Dealer.Poker>();
+            foreach ( var item in pokers ) 
+            {
+                tempPokers.Add(ParseDealPoker(item));
+            }
+            Dealer.PokerType tmepPokerType = dealer.GetPokersType(tempPokers);
+           
+            //牌型不合法
+            if ( tmepPokerType.porkerTypeUtils == Dealer.PokerTypeUtils.None && pokers != null ) return false;
+            typeUtils = tmepPokerType.porkerTypeUtils;
+
+            Console.WriteLine(1);
+            List<Dealer.Poker> tempPlayerPokers = dealer.allPlayerPoker[curRoomClientNames.IndexOf(username)].ToList();
+            if ( pokers != null ) 
+            {
+                foreach ( var item in dealer.allPlayerPoker[curRoomClientNames.IndexOf(username)] )
+                {
+                    foreach ( var item2 in tempPokers )
+                    {
+                        if ( item.weight == item2.weight && item.pokerColor == item2.pokerColor ) tempPlayerPokers.Remove(item);
+                    }
+
+                }
+                Console.WriteLine(2);
+                //玩家手牌不存在
+                if ( tempPlayerPokers.Count != dealer.allPlayerPoker[curRoomClientNames.IndexOf(username)].Count - tempPokers.Count )
+                    return false;
+            }
+            
+
+            //一轮中其他玩家没有出牌，自己可以出任意符合牌型的牌
+            if ( lastSendPokers == null )
+            {
+                Console.WriteLine(3);
+                if ( tmepPokerType.porkerTypeUtils == Dealer.PokerTypeUtils.None ) return false;
+            }
+            //上家有出牌
+            else 
+            {
+                Console.WriteLine(tmepPokerType.porkerTypeUtils+","+ dealer.GetPokersType(lastSendPokers).porkerTypeUtils);
+                Console.WriteLine(BoutNum + "," + round);
+
+                Dealer.PokerTypeUtils LastTypeUtils =  dealer.GetPokersType(lastSendPokers).porkerTypeUtils;
+
+                //牌型和上家牌型判断
+                //上家是王炸
+                if ( LastTypeUtils == Dealer.PokerTypeUtils.KingBomb ) return false;
+                //当前出的王炸不需要比牌
+                else if ( tmepPokerType.porkerTypeUtils == Dealer.PokerTypeUtils.KingBomb ) { }
+                //当前出的炸弹，上家不是炸弹，不需要比牌
+                else if ( tmepPokerType.porkerTypeUtils == Dealer.PokerTypeUtils.Bomb && LastTypeUtils != Dealer.PokerTypeUtils.Bomb )
+                {
+
+
+                }
+                //判断牌型是否合法
+                else if ( tmepPokerType.porkerTypeUtils != dealer.GetPokersType(lastSendPokers).porkerTypeUtils ) return false;
+                //上家不是炸弹，当前也不是炸弹
+                else
+                {
+
+                    //比牌阶段
+                    //比上家大
+                    if ( dealer.ComparePoker(tempPokers , lastSendPokers) )
+                    {
+                        Console.WriteLine(5);
+
+                        AddSendPokers(username , tempPokers); //将打出的牌存入容器
+
+                    }
+                    //比上家小
+                    else
+                    {
+                        Console.WriteLine(6);
+                        return false;
+
+                    }
+
+                }
+
+
+            }
+            dealer.allPlayerPoker[curRoomClientNames.IndexOf(username)] = tempPlayerPokers; //成功打出后从列表中删除打出的牌
+            AddSendPokers(username , tempPokers); //将打出的牌存入容器
+            lastSendPokers = tempPokers;
+            return true;
         
         }
 
@@ -411,14 +662,14 @@ namespace SocketDoudizhuServer.Servers
             }
 
 
-        }
+        } 
 
         //比牌
         public bool ComparePoker( List<Poker> compare , List<Poker> compared )
         {
 
-            PokerType compareType = GetType(compare);
-            PokerType comparedType = GetType(compared);
+            PokerType compareType = GetPokersType(compare);
+            PokerType comparedType = GetPokersType(compared);
 
             if ( compareType.porkerTypeUtils != comparedType.porkerTypeUtils ) return false;
 
@@ -427,12 +678,12 @@ namespace SocketDoudizhuServer.Servers
             return false;
         }
         //获取手牌类型和牌组权重
-        PokerType GetType( List<Poker> pokers = null )
+        public PokerType GetPokersType( List<Poker> pokers = null )
         {
             PokerType porkerType = new PokerType();
+            porkerType.porkerTypeUtils = PokerTypeUtils.None;
             if ( pokers == null )
             {
-                porkerType.porkerTypeUtils = PokerTypeUtils.None;
                 porkerType.weight = 0;
                 return porkerType;
             }
@@ -492,9 +743,10 @@ namespace SocketDoudizhuServer.Servers
                                 }
                                 tempWeight += sortList[i].Key;
                             }
-                            if ( sortList.Last().Key > 12 ) isContinuous = false;
+                            if ( sortList.Last().Key > 14 ) isContinuous = false;
                             tempWeight += sortList.Last().Key;
-
+                        
+                            
                             if ( isContinuous )
                             {
 
@@ -518,7 +770,7 @@ namespace SocketDoudizhuServer.Servers
                             porkerType.porkerTypeUtils = PokerTypeUtils.Double;
                         }
                         //连对牌型
-                        if ( TypeNum >= 3 && TypeNum <= 10 )
+                        if ( TypeNum >= 3 && TypeNum <= 12 )
                         {
 
                             int tempWeight = 0;
@@ -535,7 +787,7 @@ namespace SocketDoudizhuServer.Servers
                                 }
                                 tempWeight += sortList[i].Key;
                             }
-                            if ( sortList.Last().Key > 12 ) isContinuous = false;
+                            if ( sortList.Last().Key > 14 ) isContinuous = false;
                             tempWeight += sortList.Last().Key;
 
                             if ( isContinuous )
@@ -607,7 +859,7 @@ namespace SocketDoudizhuServer.Servers
                             }
 
                             //最大到A
-                            if ( treblingList.Last().Key > 12 ) isContinous = false;
+                            if ( treblingList.Last().Key > 14 ) isContinous = false;
                             tempWeight += treblingList.Last().Key;
 
 
@@ -651,7 +903,7 @@ namespace SocketDoudizhuServer.Servers
                             }
 
                             //最大到A
-                            if ( treblingList.Last().Key > 12 ) isContinous = false;
+                            if ( treblingList.Last().Key > 14 ) isContinous = false;
 
                             tempWeight += treblingList.Last().Key;
 
@@ -693,7 +945,7 @@ namespace SocketDoudizhuServer.Servers
                             }
 
                             //最大到A
-                            if ( treblingList.Last().Key > 12 ) isContinous = false;
+                            if ( treblingList.Last().Key > 14 ) isContinous = false;
 
                             tempWeight += treblingList.Last().Key;
 
@@ -750,10 +1002,10 @@ namespace SocketDoudizhuServer.Servers
 
                         break;
                     }
-
+                    
             }
 
-
+            if ( porkerType.porkerTypeUtils == PokerTypeUtils.None ) porkerType.weight = 0;
 
             return porkerType;
 
