@@ -34,7 +34,7 @@ namespace SocketDoudizhuServer.Servers
         int timer = -1;
         public int Timer { get { return timer; } }
         //回合时间
-        int boutTime = 1000;
+        int boutTime = 20;
         //轮次，3回合一轮
         int round;
         public int Round { get { return round; } }
@@ -359,6 +359,7 @@ namespace SocketDoudizhuServer.Servers
 
                     Poker poker = new Poker();
                     Dealer.Poker dPoker = dealer.allPlayerPoker[curBoutPlayerIndex].First();
+                   
                     poker.Weight = dPoker.weight;
                     poker.Pokercolor = (int)dPoker.pokerColor+1;
                     sInfo.Poker.Add(poker);
@@ -368,20 +369,18 @@ namespace SocketDoudizhuServer.Servers
                 }
             }
             timer--;
-            //回合时间耗尽，进入下一个玩家回合
-          
-
-
+            //回合时间耗尽，进入下一个玩家回合          
         }
-        void GameOver( ) 
+        public void GameOver( ) 
         {
+            gameStatus = 0;
             timer = -1;
             lastSendPokers = null;
             BoutNum = 0;
             LastBoutPlayerIndex = -1;
             curBoutPlayerIndex = 0;
             diZhuName = null;
-            gameStatus = 4;
+           
             status = 2;
             dealer = null;
             diZhuIndex.Clear();
@@ -391,9 +390,6 @@ namespace SocketDoudizhuServer.Servers
             return dealer.diZhuPai;
         
         }
-
-       
-        
         Dictionary<string , Dictionary<int,List<Dealer.Poker>>> allPlayerSendPokers = new Dictionary<string , Dictionary<int , List<Dealer.Poker>>>();//所有玩家每轮已经出的牌
         void AddSendPokers( string username , List<Dealer.Poker> pokers ) 
         {
@@ -436,8 +432,8 @@ namespace SocketDoudizhuServer.Servers
         {
             if ( dealer.allPlayerPoker[curRoomClientNames.IndexOf(username)].Count == 0 ) 
             {
-                GameOver();
-                
+
+                gameStatus = 4;
                 return true;
             }
             return false;
@@ -448,8 +444,9 @@ namespace SocketDoudizhuServer.Servers
         public bool PlayerSendPoker(string username,RepeatedField<Poker> pokers ,out Dealer.PokerTypeUtils typeUtils) 
         {
             if (  round > 2 && lastSendPokers == GetSendPokers(username , round - 1) ) lastSendPokers = null;
+
             if ( lastSendPokers !=null)
-            Console.WriteLine(lastSendPokers[0].weight);
+                Console.WriteLine(lastSendPokers[0].weight);
 
             typeUtils = Dealer.PokerTypeUtils.None;
             
@@ -529,7 +526,7 @@ namespace SocketDoudizhuServer.Servers
                     {
                         Console.WriteLine(5);
 
-                        AddSendPokers(username , tempPokers); //将打出的牌存入容器
+                      
 
                     }
                     //比上家小

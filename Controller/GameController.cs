@@ -151,8 +151,10 @@ namespace SocketDoudizhuServer.Controller
                     GameInfo gameInfo = new GameInfo();
                     gameInfo.Status = client.room.GameStatus;
                     gameInfo.Curusername = client.username;
+                    gameInfo.Dizhu = client.room.DiZhuName;
                     pack1.Gameinfo = gameInfo;
                     client.room.BoredCast(pack1);
+                    client.room.GameOver();
                     return;
                 }
                 client.room.NextBout();
